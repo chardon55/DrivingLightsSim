@@ -2,18 +2,38 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DrivingLightsSim.Views.SimulationPage"
-             xmlns:vm="clr-namespace:DrivingLightsSim.ViewModels">
+             xmlns:vm="clr-namespace:DrivingLightsSim.ViewModels"
+             Title="{Binding Title}">
     <ContentPage.BindingContext>
-        <vm:SimulationViewModel/>
+        <vm:SimulationViewModel x:Name="simulationViewModel"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <ListView>
-                
+            <ListView BackgroundColor="Azure"
+                      x:Name="displayList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout BackgroundColor="{Binding BackgroundColor}">
+                                <StackLayout Orientation="Vertical" Padding="20, 20, 20, 20">
+                                    <Label Text="{Binding Header}"
+                                       FontSize="Medium"
+                                       FontAttributes="Bold"
+                                       TextColor="{Binding TextColor}"/>
+                                    <Label Text="{Binding Answer}" HorizontalOptions="EndAndExpand"
+                                       TextColor="{Binding TextColor}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
-            <StackLayout>
+            <StackLayout Padding="10, 10"
+                         Orientation="Vertical">
+                <Button Text="随机生成"/>
+                <Button Text="显示答案"/>
+                <Button Text="重新开始" x:Name="stopButton" Clicked="stopButton_Clicked" />
                 <Button Text="播放" x:Name="playToggleButton" Clicked="playToggleButton_Clicked" />
-                <Button Text="停止" x:Name="stopButton" Clicked="stopButton_Clicked" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

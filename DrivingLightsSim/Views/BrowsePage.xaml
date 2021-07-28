@@ -2,13 +2,33 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DrivingLightsSim.Views.BrowsePage"
-             xmlns:vm="clr-namespace:DrivingLightsSim.ViewModels">
+             xmlns:vm="clr-namespace:DrivingLightsSim.ViewModels"
+             Title="{Binding Title}">
     <ContentPage.BindingContext>
-        <vm:BrowseViewModel/>
+        <vm:BrowseViewModel x:Name="browseViewModel"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            
+            <ListView x:Name="BrowseView"
+                          Header="{Binding StartCommand}"
+                          Footer="{Binding EndCommand}"
+                          SelectionMode="None"
+                          RowHeight="100">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" Padding="20, 20, 20, 20">
+                                <Label Text="{Binding Content}"
+                                       FontSize="Medium"
+                                       FontAttributes="Bold"
+                                       TextColor="#333333"/>
+                                <Label Text="{Binding Answer}" HorizontalOptions="EndAndExpand"
+                                       TextColor="#454545"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

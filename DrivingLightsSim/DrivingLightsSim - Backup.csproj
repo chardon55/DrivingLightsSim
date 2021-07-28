@@ -3,18 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
-    <PackageProjectUrl></PackageProjectUrl>
+    <PackageProjectUrl>(c) 2021 Charles Dong</PackageProjectUrl>
     <Authors>chardon</Authors>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <Product>灯光模拟小助手</Product>
     <Description>灯光模拟小助手</Description>
-    <Copyright>(c) 2021 Charles Dong</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.5.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />  
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
 
   <ItemGroup>

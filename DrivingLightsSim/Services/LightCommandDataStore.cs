@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace DrivingLightsSim.Services
 {
-    public class LightCommandDataStore : IDataStore<LightCommand>
+    public class LightCommandDataStore
     {
-        readonly List<LightCommand> LightCommands;
+        public List<LightCommand> LightCommands { get; private set; }
 
-        public LightCommandDataStore()
+        public static readonly LightCommandDataStore Instance = new LightCommandDataStore();
+
+        protected LightCommandDataStore()
         {
             var commandsDict = new Dictionary<LightCommand.AnswerType, List<string>>
             {
@@ -18,7 +20,7 @@ namespace DrivingLightsSim.Services
                     LightCommand.AnswerType.LOW,
                     new List<string>
                     {
-                        "夜间与机动车回车",
+                        "夜间与机动车会车",
                         "夜间同方向近距离跟车行驶",
                         "夜间通过有交通信号灯控制的路口",
                         "夜间在照明良好的道路上行驶",
@@ -54,18 +56,15 @@ namespace DrivingLightsSim.Services
 
             LightCommands = new List<LightCommand>();
 
+            var count = 1;
+
             foreach (var item in commandsDict)
             {
                 foreach (var value in item.Value)
                 {
-                    LightCommands.Add(new LightCommand { Content = value, Answer = item.Key });
+                    LightCommands.Add(new LightCommand { Content = value, Answer = item.Key, AudioFile = $"{count++}.mp3" });
                 }
             }
-        }
-
-        public async Task<IEnumerable<LightCommand>> GetItemsAsync(bool forceRefresh = false)
-        {
-            return await Task.FromResult(LightCommands);
         }
     }
 }

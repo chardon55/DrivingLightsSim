@@ -34,7 +34,7 @@ namespace DrivingLightsSim.Services
 
         public void Pause()
         {
-            throw new NotImplementedException();
+
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]

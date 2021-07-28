@@ -9,7 +9,7 @@ namespace DrivingLightsSim.Droid
 {
     [Activity
         (
-        Label = "DrivingLightsSim",
+        Label = "灯光模拟小助手",
         Icon = "@mipmap/icon",
         Theme = "@style/MainTheme",
         MainLauncher = true,

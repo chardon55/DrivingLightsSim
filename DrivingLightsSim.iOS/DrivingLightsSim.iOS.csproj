@@ -132,8 +132,8 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -144,5 +144,47 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\dong.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\header.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\1.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\2.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\3.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\4.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\5.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\6.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\7.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\8.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\9.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\10.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\11.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\12.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\footer.mp3" />
   </ItemGroup>
 </Project>

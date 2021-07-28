@@ -10,11 +10,19 @@ namespace DrivingLightsSim.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<LightCommand> DataStore => DependencyService.Get<IDataStore<LightCommand>>();
+        //public IDataStore<LightCommand> DataStore => DependencyService.Get<IDataStore<LightCommand>>();
+
+        public List<LightCommand> CommandList = LightCommandDataStore.Instance.LightCommands;
 
         public string StartCommand => "请开始考试，下面将开始模拟夜间灯光考试，请在语音播报“叮”一声结束后5秒内完成操作，请开启前照灯。";
 
+        public string StartCommandAudioFile => "header.mp3";
+
         public string EndCommand => "模拟夜间考试完成，请关闭所有灯光，请起步继续完成考试。";
+
+        public string EndCommandAudioFile => "footer.mp3";
+
+        public string AlertAudioFile => "dong.mp3";
 
         bool isBusy = false;
         public bool IsBusy
