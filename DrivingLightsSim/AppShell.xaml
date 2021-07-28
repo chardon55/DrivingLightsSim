@@ -30,8 +30,9 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Title="About" Icon="icon_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Browse" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent Title="关于" Icon="icon_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="所有指令" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:CommandViewPage}" />
+        <ShellContent Title="模拟考试" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:CommandViewPage}" />
     </TabBar>
 
     <!--

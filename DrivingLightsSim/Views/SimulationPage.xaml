@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DrivingLightsSim.Views.SimulationPage"
+             xmlns:vm="clr-namespace:DrivingLightsSim.ViewModels">
+    <ContentPage.BindingContext>
+        <vm:SimulationViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView>
+                
+            </ListView>
+            <StackLayout>
+                <Button Text="播放" x:Name="playToggleButton" Clicked="playToggleButton_Clicked" />
+                <Button Text="停止" x:Name="stopButton" Clicked="stopButton_Clicked" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

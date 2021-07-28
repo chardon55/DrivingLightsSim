@@ -142,4 +142,7 @@
       <Name>DrivingLightsSim</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\dong.mp3" />
+  </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@ namespace DrivingLightsSim
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<LightCommandDataStore>();
             MainPage = new AppShell();
         }
 
