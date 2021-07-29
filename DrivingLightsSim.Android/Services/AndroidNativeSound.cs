@@ -6,47 +6,86 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using DrivingLightsSim.Services;
+using DrivingLightsSim.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(DrivingLightsSim.Droid.Services.AndroidNativeSound))]
 namespace DrivingLightsSim.Droid.Services
 {
     public class AndroidNativeSound : IGenericNativeSound
     {
         private MediaPlayer player = null;
 
+        private readonly List<ISound> sounds = new List<ISound>();
+
         public event Action<ISound> OnFinish;
 
         public ISound After(ISound sound)
         {
-            throw new NotImplementedException();
+            sounds.Add(sound);
+            return this;
         }
 
-        public DeviceType GetDeviceType()
+        public void Dispose()
         {
-            throw new NotImplementedException();
+            player.Release();
+        }
+
+        public DeviceType GetDeviceType() => DeviceType.ANDROID;
+
+        public void LoadFile(string path)
+        {
+            player?.Release();
+            player = new MediaPlayer();
+
+            //MainActivity.Current.ApplicationContext.Resources.OpenRawResourceFd(prop.GetValue(null, null) as int)
+
+            var _path = path.Split(".")[0];
+            var prop = typeof(Resource.Raw).GetField(_path);
+            var descriptor = MainActivity.Current.ApplicationContext.Resources.OpenRawResourceFd((int)prop.GetValue(null));
+            player.SetDataSource(descriptor);
+            player.Prepare();
         }
 
         public void Pause()
         {
-            throw new NotImplementedException();
+            player?.Pause();
         }
 
         public void Play(Action<ISound> callback = null)
         {
-            throw new NotImplementedException();
+            if (player == null)
+            {
+                return;
+            }
+
+            player.Completion += (sender, e) =>
+            {
+                callback?.Invoke(this);
+                OnFinish?.Invoke(this);
+
+                PlaybackUtils.CascadePlayback(sounds, this);
+            };
+            player.Start();
         }
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            player?.Stop();
         }
 
         public ISound Then(Action<ISound> action)
         {
-            throw new NotImplementedException();
+            if (action != null)
+            {
+                OnFinish += s => action.Invoke(s);
+            }
+            return this;
         }
     }
 }
