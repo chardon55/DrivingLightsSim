@@ -149,42 +149,42 @@
     <BundleResource Include="Resources\header.mp3" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\1.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\2.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\3.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\4.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\5.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\6.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\7.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\8.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\9.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\10.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\11.mp3" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\12.mp3" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\footer.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\audio1.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\audio10.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\audio11.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\audio12.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\audio2.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\audio3.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\audio4.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\audio5.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\audio6.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\audio7.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\audio8.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\audio9.mp3" />
   </ItemGroup>
 </Project>

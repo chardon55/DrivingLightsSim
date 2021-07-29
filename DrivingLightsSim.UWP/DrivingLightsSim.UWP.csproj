@@ -104,6 +104,21 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="audio1.mp3" />
+    <Content Include="audio10.mp3" />
+    <Content Include="audio11.mp3" />
+    <Content Include="audio12.mp3" />
+    <Content Include="audio2.mp3" />
+    <Content Include="audio3.mp3" />
+    <Content Include="audio4.mp3" />
+    <Content Include="audio5.mp3" />
+    <Content Include="audio6.mp3" />
+    <Content Include="audio7.mp3" />
+    <Content Include="audio8.mp3" />
+    <Content Include="audio9.mp3" />
+    <Content Include="dong.mp3" />
+    <Content Include="footer.mp3" />
+    <Content Include="header.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
