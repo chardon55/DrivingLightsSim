@@ -62,7 +62,13 @@ namespace DrivingLightsSim.Services
             {
                 foreach (var value in item.Value)
                 {
-                    LightCommands.Add(new LightCommand { Content = value, Answer = item.Key, AudioFile = $"{count++}.mp3" });
+                    LightCommands.Add(new LightCommand
+                    {
+                        Content = value,
+                        Answer = item.Key,
+                        AudioFile = $"{count++}.mp3",
+                        IsFinal = item.Key == LightCommand.AnswerType.FLASHING,
+                    });
                 }
             }
         }

@@ -30,10 +30,6 @@ namespace DrivingLightsSim.Views
             {
                 displayItemList.Add(new DisplayItem { Content = item.Content, Answer = item.Answer.ToDecriptionString() });
             });
-
-            BrowseView.ItemsSource = displayItemList;
-
-            new NAudioWrapperSound("1.mp3").Play();
         }
     }
 }

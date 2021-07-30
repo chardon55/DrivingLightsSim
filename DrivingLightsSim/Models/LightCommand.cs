@@ -13,6 +13,8 @@ namespace DrivingLightsSim.Models
 
         public string AudioFile { get; set; }
 
+        public bool IsFinal {  get; set; }
+
         public enum AnswerType
         {
             LOW, HIGH, LOW_HIGH, FLASHING,

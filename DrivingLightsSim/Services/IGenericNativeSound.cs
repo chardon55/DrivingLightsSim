@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DrivingLightsSim.Services
 {
-    public interface IGenericNativeSound : ISound
+    public interface IGenericNativeSound : ISound, IDisposable
     {
         DeviceType GetDeviceType();
     }
