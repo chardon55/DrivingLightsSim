@@ -1,4 +1,5 @@
-﻿using DrivingLightsSim.Services;
+﻿using DrivingLightsSim.Services.Audio;
+using DrivingLightsSim.Services;
 using DrivingLightsSim.Utils;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,8 @@ using Windows.Media.Core;
 using Windows.Media.Playback;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(DrivingLightsSim.UWP.Services.UWPNativeSound))]
-namespace DrivingLightsSim.UWP.Services
+[assembly: Dependency(typeof(DrivingLightsSim.UWP.Services.Audio.UWPNativeSound))]
+namespace DrivingLightsSim.UWP.Services.Audio
 {
     public class UWPNativeSound : IGenericNativeSound
     {
@@ -45,7 +46,7 @@ namespace DrivingLightsSim.UWP.Services
             player?.Pause();
         }
 
-        public void Play(Action<ISound> callback = null)
+        public void Play(Action<ISound> callback = null, Action<ISound> before = null)
         {
             if (player == null)
             {
@@ -61,6 +62,7 @@ namespace DrivingLightsSim.UWP.Services
             };
 
             Stop();
+            before?.Invoke(this);
             player.Play();
         }
 

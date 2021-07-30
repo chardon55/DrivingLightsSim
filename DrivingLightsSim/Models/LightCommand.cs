@@ -23,7 +23,7 @@ namespace DrivingLightsSim.Models
 
     public static class AnswerTypeExtensions
     {
-        public static string ToDecriptionString(this AnswerType @this)
+        public static string GetDescription(this AnswerType @this)
         {
             switch (@this)
             {

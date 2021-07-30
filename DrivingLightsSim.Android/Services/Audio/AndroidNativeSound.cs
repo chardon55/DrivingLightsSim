@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using DrivingLightsSim.Services.Audio;
 using DrivingLightsSim.Services;
 using DrivingLightsSim.Utils;
 using System;
@@ -14,8 +15,8 @@ using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(DrivingLightsSim.Droid.Services.AndroidNativeSound))]
-namespace DrivingLightsSim.Droid.Services
+[assembly: Dependency(typeof(DrivingLightsSim.Droid.Services.Audio.AndroidNativeSound))]
+namespace DrivingLightsSim.Droid.Services.Audio
 {
     public class AndroidNativeSound : IGenericNativeSound
     {
@@ -57,7 +58,7 @@ namespace DrivingLightsSim.Droid.Services
             player?.Pause();
         }
 
-        public void Play(Action<ISound> callback = null)
+        public void Play(Action<ISound> callback = null, Action<ISound> before = null)
         {
             if (player == null)
             {
@@ -71,6 +72,8 @@ namespace DrivingLightsSim.Droid.Services
 
                 PlaybackUtils.CascadePlayback(sounds, this);
             };
+
+            before?.Invoke(this);
             player.Start();
         }
 

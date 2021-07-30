@@ -28,7 +28,7 @@ namespace DrivingLightsSim.Views
 
             browseViewModel.CommandList.ForEach(item =>
             {
-                displayItemList.Add(new DisplayItem { Content = item.Content, Answer = item.Answer.ToDecriptionString() });
+                displayItemList.Add(new DisplayItem { Content = item.Content, Answer = item.Answer.GetDescription() });
             });
         }
     }

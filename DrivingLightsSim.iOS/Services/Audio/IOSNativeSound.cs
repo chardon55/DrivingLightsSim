@@ -1,4 +1,5 @@
 ﻿using AVFoundation;
+using DrivingLightsSim.Services.Audio;
 using DrivingLightsSim.Services;
 using DrivingLightsSim.Utils;
 using Foundation;
@@ -9,8 +10,8 @@ using System.Text;
 using UIKit;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(DrivingLightsSim.iOS.Services.IOSNativeSound))]
-namespace DrivingLightsSim.iOS.Services
+[assembly: Dependency(typeof(DrivingLightsSim.iOS.Services.Audio.IOSNativeSound))]
+namespace DrivingLightsSim.iOS.Services.Audio
 {
     public class IOSNativeSound : IGenericNativeSound
     {
@@ -45,7 +46,7 @@ namespace DrivingLightsSim.iOS.Services
             audioPlayer?.Pause();
         }
 
-        public void Play(Action<ISound> callback = null)
+        public void Play(Action<ISound> callback = null, Action<ISound> before = null)
         {
             if (audioPlayer == null)
             {
@@ -60,6 +61,7 @@ namespace DrivingLightsSim.iOS.Services
                 PlaybackUtils.CascadePlayback(sounds, this);
             };
 
+            before?.Invoke(this);
             audioPlayer.Play();
         }
 
