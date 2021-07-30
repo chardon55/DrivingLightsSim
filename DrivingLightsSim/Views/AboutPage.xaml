@@ -40,8 +40,8 @@
                             <FormattedString.Spans>
                                 <Span Text="版本："/>
                                 <Span Text="{Static xe:AppInfo.VersionString}"/>
-                                <!--<Span Text="."/>
-                                <Span Text="{Static xe:AppInfo.BuildString}"/>-->
+                                <Span Text="."/>
+                                <Span Text="{Static xe:AppInfo.BuildString}"/>
                             </FormattedString.Spans>
                         </FormattedString>
                     </Label.FormattedText>

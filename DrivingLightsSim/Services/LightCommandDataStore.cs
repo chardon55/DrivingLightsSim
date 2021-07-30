@@ -66,7 +66,7 @@ namespace DrivingLightsSim.Services
                     {
                         Content = value,
                         Answer = item.Key,
-                        AudioFile = $"{count++}.mp3",
+                        AudioFile = $"audio{count++}.mp3",
                         IsFinal = item.Key == LightCommand.AnswerType.FLASHING,
                     });
                 }

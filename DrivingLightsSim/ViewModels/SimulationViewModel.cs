@@ -133,7 +133,7 @@ namespace DrivingLightsSim.ViewModels
         public SimulationViewModel()
         {
             Title = "模拟";
-            Reset();
+            //Reset();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using DrivingLightsSim.DrivingLightsSim.Services.Audio;
+﻿using DrivingLightsSim.Services.Audio;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -39,11 +39,12 @@ namespace DrivingLightsSim.Services
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void Play(Action<ISound> callback = null)
+        public void Play(Action<ISound> callback = null, Action<ISound> before = null)
         {
             Stop();
 
             cts = new CancellationTokenSource();
+            before?.Invoke(this);
             TextToSpeech.SpeakAsync(Content, cancelToken: cts.Token).ContinueWith(t =>
             {
                 callback?.Invoke(this);

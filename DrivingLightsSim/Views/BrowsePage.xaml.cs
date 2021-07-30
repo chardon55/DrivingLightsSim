@@ -1,5 +1,6 @@
 ﻿using DrivingLightsSim.Models;
 using DrivingLightsSim.Services;
+using DrivingLightsSim.Services.Audio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,24 @@ namespace DrivingLightsSim.Views
             browseViewModel.CommandList.ForEach(item =>
             {
                 displayItemList.Add(new DisplayItem { Content = item.Content, Answer = item.Answer.GetDescription() });
+            });
+
+            BrowseView.ItemsSource = displayItemList;
+        }
+
+        private void BrowseView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var factory = new AudioPlayerFactory();
+
+            var player = new AudioPlayerFactory().GetNativeSound(browseViewModel.CommandList[e.ItemIndex].AudioFile);
+            player.Play(callback: s =>
+            {
+                var dongSound = factory.GetNativeSound("dong.mp3");
+                dongSound.Play(callback: s =>
+                {
+                    dongSound.Dispose();
+                    player.Dispose();
+                });
             });
         }
     }

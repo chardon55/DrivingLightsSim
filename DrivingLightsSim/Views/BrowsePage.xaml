@@ -10,10 +10,11 @@
     <ContentPage.Content>
         <StackLayout>
             <ListView x:Name="BrowseView"
-                          Header="{Binding StartCommand}"
-                          Footer="{Binding EndCommand}"
-                          SelectionMode="None"
-                          RowHeight="100">
+                      Header="{Binding StartCommand}"
+                      Footer="{Binding EndCommand}"
+                      SelectionMode="None"
+                      RowHeight="100"
+                      ItemTapped="BrowseView_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
