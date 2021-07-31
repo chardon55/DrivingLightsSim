@@ -27,28 +27,39 @@ namespace DrivingLightsSim.Views
                 {
                     UpdateIconSource();
                 }
+                else if (e.PropertyName.Equals("InfoList"))
+                {
+                    UpdateDisplayList();
+                }
             };
+
+            displayList.RefreshCommand = new Command(() =>
+            {
+                simulationViewModel.Reset();
+                UpdateDisplayList();
+                displayList.EndRefresh();
+            });
+        }
+
+        private void UpdateDisplayList()
+        {
+            displayList.ItemsSource = null;
+            displayList.ItemsSource = simulationViewModel.InfoList;
         }
 
         private void PlayToggleButton_Clicked(object sender, EventArgs e)
         {
             simulationViewModel.PlayToggle();
-            UpdateIconSource();
         }
 
         private void StopButton_Clicked(object sender, EventArgs e)
         {
             simulationViewModel.Stop();
-            UpdateIconSource();
         }
 
         private void ResetButton_Clicked(object sender, EventArgs e)
         {
-            simulationViewModel.Reset();
-            UpdateIconSource();
-
-            displayList.ItemsSource = null;
-            displayList.ItemsSource = simulationViewModel.InfoList;
+            displayList.BeginRefresh();
         }
     }
 }

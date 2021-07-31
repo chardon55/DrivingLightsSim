@@ -9,15 +9,8 @@ using System.Threading.Tasks;
 
 namespace DrivingLightsSim.ViewModels
 {
-    public class SimulationViewModel : BaseViewModel, INotifyPropertyChanged
+    public class SimulationViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected new virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public List<string> displayTexts = new List<string>();
 
         public HashSet<LightCommand> lightCommands = new HashSet<LightCommand>();
@@ -28,7 +21,7 @@ namespace DrivingLightsSim.ViewModels
 
         public List<DisplayInfo> InfoList { get; } = new List<DisplayInfo>();
 
-        public List<LightCommand> ActiveCommands { get; private set; } = new List<LightCommand>();
+        public List<LightCommand> CurrentCommands { get; private set; } = new List<LightCommand>();
 
         public bool IsPlaying { get; private set; } = false;
 
@@ -46,23 +39,62 @@ namespace DrivingLightsSim.ViewModels
             public string DisplayAnswer { get; set; }
 
             public Status Status { get; set; }
+
+            public string BackgroundColor => Status == Status.IDLE ? "None" : "#C2185B";
+
+            public string TextColor => Status == Status.IDLE ? "#424242" : "#FFFFFF";
+        }
+
+        private Dictionary<int, int> cursorMap = new Dictionary<int, int>();
+
+        private void ResetStatus()
+        {
+            for (int i = 0; i < InfoList.Count; i++)
+            {
+                var item = InfoList[i];
+                item.Status = Status.IDLE;
+                InfoList[i] = item;
+            }
+            OnPropertyChanged("InfoList");
         }
 
         public async Task PlayAsync()
         {
             var player = AsyncAudioPlayer.Instance;
 
+            cursorMap.Clear();
+
             player.LoadSource(StartCommandAudioFile);
             player.AddInterrupt(3000);
 
-            foreach (var item in ActiveCommands)
+            int cursor = 2;
+
+            for (int i = 0; i < CurrentCommands.Count; i++)
             {
-                item.LoadAudio(append: true, interruptAfter: 5000);
+                LightCommand item = CurrentCommands[i];
+                item.LoadAudio(append: true, interruptAfter: 5000, callback: lc =>
+                {
+                    ResetStatus();
+
+                    var index = InfoList.FindIndex(di => di.Title.Equals(lc.Content));
+
+                    var item = InfoList[index];
+                    item.Status = Status.ACTIVE;
+                    InfoList[index] = item;
+                    OnPropertyChanged("InfoList");
+                });
+
+                cursorMap.Add(cursor, i);
+                cursor += 2;
             }
 
-            player.LoadSource(EndCommandAudioFile, append: true);
+            player.LoadSource(EndCommandAudioFile, append: true, callback: s =>
+            {
+                ResetStatus();
+            });
 
             IsPlaying = true;
+            OnPropertyChanged("IsPlaying");
             await player.PlayAsync();
             IsPlaying = false;
             OnPropertyChanged("IsPlaying");
@@ -77,6 +109,7 @@ namespace DrivingLightsSim.ViewModels
         {
             AsyncAudioPlayer.Instance.Pause();
             IsPlaying = false;
+            OnPropertyChanged("IsPlaying");
         }
 
         public void PlayToggle()
@@ -94,7 +127,9 @@ namespace DrivingLightsSim.ViewModels
         public void Stop()
         {
             AsyncAudioPlayer.Instance.Stop();
+            ResetStatus();
             IsPlaying = false;
+            OnPropertyChanged("IsPlaying");
         }
 
         private bool answerStatus = false;
@@ -165,7 +200,7 @@ namespace DrivingLightsSim.ViewModels
             };
 
             InfoList.Clear();
-            ActiveCommands.Clear();
+            CurrentCommands.Clear();
 
             var indices = RandomIndices(5, new List<int>(new int[] { CommandList.Count - 1 }));
 
@@ -181,10 +216,11 @@ namespace DrivingLightsSim.ViewModels
                     DisplayAnswer = Resources.Strings.ShowAnswer,
                 });
 
-                ActiveCommands.Add(item);
+                CurrentCommands.Add(item);
             }
 
             OnPropertyChanged("InfoList");
+            OnPropertyChanged("CurrentCommands");
         }
 
         public SimulationViewModel()

@@ -56,18 +56,16 @@ namespace DrivingLightsSim.iOS.Services.Audio
                 return;
             }
 
-            if (!paused)
+            audioPlayer.FinishedPlaying += (sender, e) =>
             {
-                audioPlayer.FinishedPlaying += (sender, e) =>
-                {
-                    callback?.Invoke(this);
-                    OnFinish?.Invoke(this);
+                callback?.Invoke(this);
+                OnFinish?.Invoke(this);
 
-                    PlaybackUtils.CascadePlayback(sounds, this);
-                };
+                PlaybackUtils.CascadePlayback(sounds, this);
+            };
 
-                before?.Invoke(this);
-            }
+            before?.Invoke(this);
+
             audioPlayer.Play();
             paused = false;
         }

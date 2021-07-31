@@ -15,11 +15,11 @@ namespace DrivingLightsSim.Utils
             await AsyncAudioPlayer.Instance.PlayAsync();
         }
 
-        public static void LoadAudio(this LightCommand @this, bool append = false, int interruptAfter = 0)
+        public static void LoadAudio(this LightCommand @this, bool append = false, int interruptAfter = 0, Action<LightCommand> callback = null)
         {
             var player = AsyncAudioPlayer.Instance;
 
-            player.LoadSource(@this.AudioFile, append: append);
+            player.LoadSource(@this.AudioFile, append: append, callback: s => callback?.Invoke(@this));
             player.LoadSource("dong.mp3", append: true);
 
             if (interruptAfter > 0)

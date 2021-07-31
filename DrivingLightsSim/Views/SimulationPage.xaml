@@ -17,7 +17,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
+                            <StackLayout BackgroundColor="{Binding BackgroundColor}">
                                 <StackLayout Orientation="Vertical" Padding="20, 20, 20, 20">
                                     <Label Text="{Binding Title}"
                                        FontSize="Medium"

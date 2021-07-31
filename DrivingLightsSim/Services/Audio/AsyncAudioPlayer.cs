@@ -1,16 +1,17 @@
-﻿using DrivingLightsSim.Utils;
+﻿using DrivingLightsSim.Models;
+using DrivingLightsSim.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using static DrivingLightsSim.Services.Audio.HighLevelAudioQueue;
 
 namespace DrivingLightsSim.Services.Audio
 {
     public sealed class AsyncAudioPlayer
     {
+
         public static readonly AsyncAudioPlayer Instance = new AsyncAudioPlayer();
 
         public const string INTERRUPT_SINGAL = "##";
@@ -19,7 +20,13 @@ namespace DrivingLightsSim.Services.Audio
 
         private IGenericNativeSound sound;
 
-        private List<string> sourceList = new List<string>();
+        private List<ComboSource> sourceList = new List<ComboSource>();
+
+        public struct ComboSource
+        {
+            public string Source { get; set; }
+            public Action<string> Callback { get; set; }
+        }
 
         private int cursor = 0;
 
@@ -34,9 +41,16 @@ namespace DrivingLightsSim.Services.Audio
             sound = DependencyService.Get<IGenericNativeSound>();
         }
 
-        public void LoadSource(string source, bool append = false)
+        public void LoadSource(string source, bool append = false, Action<string> callback = null)
         {
             LoadSource(new string[] { source }, append);
+
+            if (callback != null)
+            {
+                var lastItem = sourceList[^1];
+                lastItem.Callback = callback;
+                sourceList[^1] = lastItem;
+            }
         }
 
         public void LoadSource(ICollection<string> sources, bool append = false)
@@ -53,7 +67,7 @@ namespace DrivingLightsSim.Services.Audio
 
             foreach (string source in sources)
             {
-                sourceList.Add(source);
+                sourceList.Add(new ComboSource { Source = source, Callback = null });
             }
         }
 
@@ -87,16 +101,18 @@ namespace DrivingLightsSim.Services.Audio
             playStarted = playing = true;
 
             for (; cursor < sourceList.Count; cursor++)
-{
-                string source = sourceList[cursor];
+            {
+                var source = sourceList[cursor];
 
-                if (source.IsInterrupt(out int delay))
+                if (source.Source.IsInterrupt(out int delay))
                 {
+                    source.Callback?.Invoke(source.Source);
                     await Task.Delay(delay);
                     continue;
                 }
-
-                sound.LoadFile(source);
+                
+                sound.LoadFile(source.Source);
+                source.Callback?.Invoke(source.Source);
                 await StartPlayingAsync();
             }
 
@@ -105,7 +121,7 @@ namespace DrivingLightsSim.Services.Audio
 
         public void Pause()
         {
-            sound.Pause();
+            sound.Stop();
             playing = false;
         }
 

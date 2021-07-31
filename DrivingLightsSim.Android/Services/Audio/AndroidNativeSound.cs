@@ -46,8 +46,6 @@ namespace DrivingLightsSim.Droid.Services.Audio
             player?.Release();
             player = new MediaPlayer();
 
-            //MainActivity.Current.ApplicationContext.Resources.OpenRawResourceFd(prop.GetValue(null, null) as int)
-
             var _path = path.Split(".")[0];
             var prop = typeof(Resource.Raw).GetField(_path);
             var descriptor = MainActivity.Current.ApplicationContext.Resources.OpenRawResourceFd((int)prop.GetValue(null));
@@ -68,18 +66,15 @@ namespace DrivingLightsSim.Droid.Services.Audio
                 return;
             }
 
-            if (!paused)
+            player.Completion += (sender, e) =>
             {
-                player.Completion += (sender, e) =>
-                {
-                    callback?.Invoke(this);
-                    OnFinish?.Invoke(this);
+                callback?.Invoke(this);
+                OnFinish?.Invoke(this);
 
-                    PlaybackUtils.CascadePlayback(sounds, this);
-                };
+                PlaybackUtils.CascadePlayback(sounds, this);
+            };
 
-                before?.Invoke(this);
-            }
+            before?.Invoke(this);
             player.Start();
             paused = false;
         }
