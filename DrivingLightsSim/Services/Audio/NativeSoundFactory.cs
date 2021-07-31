@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace DrivingLightsSim.Services.Audio
 {
-    public class AudioPlayerFactory
+    public class NativeSoundFactory
     {
         public IGenericNativeSound GetNativeSound(string url)
         {

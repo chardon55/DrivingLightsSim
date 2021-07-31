@@ -19,6 +19,8 @@ namespace DrivingLightsSim.iOS.Services.Audio
 
         private List<ISound> sounds = new List<ISound>();
 
+        private bool paused = false;
+
         public event Action<ISound> OnFinish;
 
         public ISound After(ISound sound)
@@ -44,6 +46,7 @@ namespace DrivingLightsSim.iOS.Services.Audio
         public void Pause()
         {
             audioPlayer?.Pause();
+            paused = true;
         }
 
         public void Play(Action<ISound> callback = null, Action<ISound> before = null)
@@ -53,16 +56,20 @@ namespace DrivingLightsSim.iOS.Services.Audio
                 return;
             }
 
-            audioPlayer.FinishedPlaying += (sender, e) =>
+            if (!paused)
             {
-                callback?.Invoke(this);
-                OnFinish?.Invoke(this);
+                audioPlayer.FinishedPlaying += (sender, e) =>
+                {
+                    callback?.Invoke(this);
+                    OnFinish?.Invoke(this);
 
-                PlaybackUtils.CascadePlayback(sounds, this);
-            };
+                    PlaybackUtils.CascadePlayback(sounds, this);
+                };
 
-            before?.Invoke(this);
+                before?.Invoke(this);
+            }
             audioPlayer.Play();
+            paused = false;
         }
 
         public void Stop()

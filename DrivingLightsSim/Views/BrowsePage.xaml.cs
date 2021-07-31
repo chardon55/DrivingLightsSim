@@ -35,20 +35,12 @@ namespace DrivingLightsSim.Views
             BrowseView.ItemsSource = displayItemList;
         }
 
-        private void BrowseView_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void BrowseView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var factory = new AudioPlayerFactory();
+            AsyncAudioPlayer.Instance.LoadSource(browseViewModel.CommandList[e.ItemIndex].AudioFile);
+            AsyncAudioPlayer.Instance.LoadSource("dong.mp3", append: true);
 
-            var player = new AudioPlayerFactory().GetNativeSound(browseViewModel.CommandList[e.ItemIndex].AudioFile);
-            player.Play(callback: s =>
-            {
-                var dongSound = factory.GetNativeSound("dong.mp3");
-                dongSound.Play(callback: s =>
-                {
-                    dongSound.Dispose();
-                    player.Dispose();
-                });
-            });
+            await AsyncAudioPlayer.Instance.PlayAsync();
         }
     }
 }

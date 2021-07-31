@@ -24,6 +24,8 @@ namespace DrivingLightsSim.Droid.Services.Audio
 
         private readonly List<ISound> sounds = new List<ISound>();
 
+        private bool paused = false;
+
         public event Action<ISound> OnFinish;
 
         public ISound After(ISound sound)
@@ -56,6 +58,7 @@ namespace DrivingLightsSim.Droid.Services.Audio
         public void Pause()
         {
             player?.Pause();
+            paused = true;
         }
 
         public void Play(Action<ISound> callback = null, Action<ISound> before = null)
@@ -65,16 +68,20 @@ namespace DrivingLightsSim.Droid.Services.Audio
                 return;
             }
 
-            player.Completion += (sender, e) =>
+            if (!paused)
             {
-                callback?.Invoke(this);
-                OnFinish?.Invoke(this);
+                player.Completion += (sender, e) =>
+                {
+                    callback?.Invoke(this);
+                    OnFinish?.Invoke(this);
 
-                PlaybackUtils.CascadePlayback(sounds, this);
-            };
+                    PlaybackUtils.CascadePlayback(sounds, this);
+                };
 
-            before?.Invoke(this);
+                before?.Invoke(this);
+            }
             player.Start();
+            paused = false;
         }
 
         public void Stop()
