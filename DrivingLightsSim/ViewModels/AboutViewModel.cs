@@ -36,7 +36,7 @@ namespace DrivingLightsSim.ViewModels
 
         public ICommand CheckUpdates { get; }
 
-        private Dictionary<string, string> sources = new Dictionary<string, string>
+        private readonly Dictionary<string, string> sources = new Dictionary<string, string>
         {
             {
                 "GITHUB",
@@ -47,6 +47,19 @@ namespace DrivingLightsSim.ViewModels
                 "https://gitee.com/api/v5/repos/dy55/driving-lights-sim/releases"
             }
         };
+
+        private readonly Dictionary<string, bool> descDict = new Dictionary<string, bool>
+        {
+            {
+                "GITHUB",
+                true
+            },
+            {
+                "GITEE",
+                false
+            }
+        };
+
 
         public async Task<NewVersionInfo> GetReleaseInfoAsync(string source)
         {
@@ -61,6 +74,11 @@ namespace DrivingLightsSim.ViewModels
                     NamingStrategy = new SnakeCaseNamingStrategy()
                 }
             });
+
+            if (!descDict[source])
+            {
+                infoList.Reverse();
+            }
 
             foreach (var item in infoList)
             {
