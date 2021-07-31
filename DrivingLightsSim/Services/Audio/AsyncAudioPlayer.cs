@@ -90,9 +90,7 @@ namespace DrivingLightsSim.Services.Audio
 {
                 string source = sourceList[cursor];
 
-                bool success = source.IsInterrupt(out int delay);
-
-                if (success)
+                if (source.IsInterrupt(out int delay))
                 {
                     await Task.Delay(delay);
                     continue;

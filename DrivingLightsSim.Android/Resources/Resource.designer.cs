@@ -12200,19 +12200,37 @@ namespace DrivingLightsSim.Droid
 			public const int notify_panel_notification_icon_bg = 2131165327;
 			
 			// aapt resource value: 0x7F070090
-			public const int preference_list_divider_material = 2131165328;
+			public const int pause = 2131165328;
 			
 			// aapt resource value: 0x7F070091
-			public const int test_custom_background = 2131165329;
+			public const int pause_light = 2131165329;
 			
 			// aapt resource value: 0x7F070092
-			public const int tooltip_frame_dark = 2131165330;
+			public const int play = 2131165330;
 			
 			// aapt resource value: 0x7F070093
-			public const int tooltip_frame_light = 2131165331;
+			public const int play_light = 2131165331;
 			
 			// aapt resource value: 0x7F070094
-			public const int xamarin_logo = 2131165332;
+			public const int preference_list_divider_material = 2131165332;
+			
+			// aapt resource value: 0x7F070095
+			public const int stop = 2131165333;
+			
+			// aapt resource value: 0x7F070096
+			public const int stop_light = 2131165334;
+			
+			// aapt resource value: 0x7F070097
+			public const int test_custom_background = 2131165335;
+			
+			// aapt resource value: 0x7F070098
+			public const int tooltip_frame_dark = 2131165336;
+			
+			// aapt resource value: 0x7F070099
+			public const int tooltip_frame_light = 2131165337;
+			
+			// aapt resource value: 0x7F07009A
+			public const int xamarin_logo = 2131165338;
 			
 			static Drawable()
 			{

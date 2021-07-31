@@ -1,6 +1,7 @@
 ﻿using DrivingLightsSim.Models;
 using DrivingLightsSim.Services;
 using DrivingLightsSim.Services.Audio;
+using DrivingLightsSim.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,20 +28,17 @@ namespace DrivingLightsSim.Views
         {
             InitializeComponent();
 
-            browseViewModel.CommandList.ForEach(item =>
+            foreach (LightCommand item in browseViewModel.CommandList)
             {
                 displayItemList.Add(new DisplayItem { Content = item.Content, Answer = item.Answer.GetDescription() });
-            });
+            }
 
             BrowseView.ItemsSource = displayItemList;
         }
 
         private async void BrowseView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            AsyncAudioPlayer.Instance.LoadSource(browseViewModel.CommandList[e.ItemIndex].AudioFile);
-            AsyncAudioPlayer.Instance.LoadSource("dong.mp3", append: true);
-
-            await AsyncAudioPlayer.Instance.PlayAsync();
+            await browseViewModel.CommandList[e.ItemIndex].PlayAudioAsync();
         }
     }
 }

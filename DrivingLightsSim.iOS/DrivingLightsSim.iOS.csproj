@@ -188,4 +188,22 @@
   <ItemGroup>
     <BundleResource Include="Resources\audio9.mp3" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\play_light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\stop_light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pause_light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\play.png" />
+  </ItemGroup>
 </Project>

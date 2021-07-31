@@ -10,13 +10,16 @@
     <ContentPage.Content>
         <StackLayout>
             <ListView BackgroundColor="Azure"
-                      x:Name="displayList">
+                      x:Name="displayList"
+                      ItemsSource="{Binding InfoList, Mode=TwoWay}"
+                      SelectionMode="None"
+                      RowHeight="100">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout BackgroundColor="{Binding BackgroundColor}">
+                            <StackLayout>
                                 <StackLayout Orientation="Vertical" Padding="20, 20, 20, 20">
-                                    <Label Text="{Binding Header}"
+                                    <Label Text="{Binding Title}"
                                        FontSize="Medium"
                                        FontAttributes="Bold"
                                        TextColor="{Binding TextColor}"/>
@@ -29,11 +32,22 @@
                 </ListView.ItemTemplate>
             </ListView>
             <StackLayout Padding="10, 10"
-                         Orientation="Vertical">
-                <Button Text="随机生成"/>
-                <Button Text="显示答案"/>
-                <Button Text="重新开始" x:Name="stopButton" Clicked="stopButton_Clicked" />
-                <Button Text="播放" x:Name="playToggleButton" Clicked="playToggleButton_Clicked" />
+                         Orientation="Horizontal"
+                         HorizontalOptions="Center"
+                         HeightRequest="80">
+                <Button Text="重新生成" x:Name="ResetButton" Clicked="ResetButton_Clicked"
+                        Scale="0.7"/>
+                <ImageButton Source="play_light.png" CornerRadius="9999"
+                             Clicked="PlayToggleButton_Clicked"
+                             HeightRequest="80"
+                             WidthRequest="80"
+                             BackgroundColor="{StaticResource Primary}"
+                             x:Name="PlayToggleButton"/>
+                <ImageButton Source="stop_light.png"  x:Name="StopButton" Clicked="StopButton_Clicked" 
+                             HeightRequest="80"
+                             WidthRequest="90"
+                             Scale="0.7"
+                             BackgroundColor="{StaticResource Primary}"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
