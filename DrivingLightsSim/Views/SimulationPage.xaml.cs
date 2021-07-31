@@ -66,7 +66,10 @@ namespace DrivingLightsSim.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            simulationViewModel.Pause();
+            if (simulationViewModel.IsPlaying)
+            {
+                simulationViewModel.Pause();
+            }
         }
 
         protected override void OnAppearing()
