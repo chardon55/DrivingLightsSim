@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Net;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -25,7 +26,17 @@ namespace DrivingLightsSim.Views
                 return;
             }
 
-            var info = await aboutViewModel.GetReleaseInfoAsync("GITEE");
+            Models.NewVersionInfo info;
+
+            try
+            {
+                info = await aboutViewModel.GetReleaseInfoAsync("GITEE");
+            }
+            catch (WebException ex)
+            {
+                await DisplayAlert("错误", "网络异常，请检查网络", "确定");
+                return;
+            }
 
             if (info == null)
             {
