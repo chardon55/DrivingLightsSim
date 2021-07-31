@@ -1,4 +1,5 @@
 ﻿using DrivingLightsSim.Services;
+using DrivingLightsSim.Services.Audio;
 using DrivingLightsSim.Views;
 using System;
 using Xamarin.Forms;
@@ -23,6 +24,7 @@ namespace DrivingLightsSim
 
         protected override void OnSleep()
         {
+            AsyncAudioPlayer.Instance.Pause();
         }
 
         protected override void OnResume()

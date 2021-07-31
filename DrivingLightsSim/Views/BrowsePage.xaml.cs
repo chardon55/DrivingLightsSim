@@ -40,5 +40,11 @@ namespace DrivingLightsSim.Views
         {
             await browseViewModel.CommandList[e.ItemIndex].PlayAudioAsync();
         }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            AsyncAudioPlayer.Instance.Pause();
+        }
     }
 }

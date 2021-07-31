@@ -48,6 +48,12 @@ namespace DrivingLightsSim.Droid.Services.Audio
 
             var _path = path.Split(".")[0];
             var prop = typeof(Resource.Raw).GetField(_path);
+
+            if (prop is null)
+            {
+                return;
+            }
+
             var descriptor = MainActivity.Current.ApplicationContext.Resources.OpenRawResourceFd((int)prop.GetValue(null));
             player.SetDataSource(descriptor);
             player.Prepare();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DrivingLightsSim.Services.Audio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -60,6 +61,18 @@ namespace DrivingLightsSim.Views
         private void ResetButton_Clicked(object sender, EventArgs e)
         {
             displayList.BeginRefresh();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            simulationViewModel.Pause();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            UpdateIconSource();
         }
     }
 }

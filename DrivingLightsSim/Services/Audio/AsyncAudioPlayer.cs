@@ -34,6 +34,8 @@ namespace DrivingLightsSim.Services.Audio
 
         private bool playing = false;
 
+        private bool skip = false;
+
         public bool IsPlaying => playing;
 
         private AsyncAudioPlayer()
@@ -98,22 +100,41 @@ namespace DrivingLightsSim.Services.Audio
                 cursor = 0;
             }
 
+            skip = false;
             playStarted = playing = true;
 
             for (; cursor < sourceList.Count; cursor++)
             {
+                if (skip)
+                {
+                    break;
+                }
+
                 var source = sourceList[cursor];
 
                 if (source.Source.IsInterrupt(out int delay))
                 {
                     source.Callback?.Invoke(source.Source);
                     await Task.Delay(delay);
+
+                    if (skip)
+                    {
+                        break;
+                    }
+
                     continue;
                 }
                 
                 sound.LoadFile(source.Source);
                 source.Callback?.Invoke(source.Source);
+
+                
                 await StartPlayingAsync();
+
+                if (skip)
+                {
+                    break;
+                }
             }
 
             playStarted = playing = false;
@@ -121,13 +142,26 @@ namespace DrivingLightsSim.Services.Audio
 
         public void Pause()
         {
+            skip = true;
             sound.Stop();
+            if ((sourceList?.Count ?? -1) > 0)
+            {
+                sound.LoadFile(sourceList[cursor].Source);
+            }
+
             playing = false;
         }
 
         public void Stop()
         {
+            skip = true;
             sound.Stop();
+            cursor = 0;
+            if ((sourceList?.Count ?? -1) > 0)
+            {
+                sound.LoadFile(sourceList[cursor].Source);
+            }
+
             playStarted = playing = false;
         }
     }
