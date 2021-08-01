@@ -142,6 +142,10 @@ namespace DrivingLightsSim.Services.Audio
 
         public void Pause()
         {
+            if (!IsPlaying)
+            {
+                return;
+            }
             skip = true;
             sound.Stop();
             if ((sourceList?.Count ?? -1) > 0)
@@ -154,6 +158,10 @@ namespace DrivingLightsSim.Services.Audio
 
         public void Stop()
         {
+            if (!playStarted)
+            {
+                return;
+            }
             skip = true;
             sound.Stop();
             cursor = 0;
