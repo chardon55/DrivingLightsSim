@@ -1,11 +1,13 @@
 ﻿using DrivingLightsSim.Models;
 using DrivingLightsSim.Services.Audio;
+using DrivingLightsSim.Themes;
 using DrivingLightsSim.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace DrivingLightsSim.ViewModels
 {
@@ -40,9 +42,19 @@ namespace DrivingLightsSim.ViewModels
 
             public Status Status { get; set; }
 
-            public string BackgroundColor => Status == Status.IDLE ? "None" : "#C2185B";
+            private ResourceDictionary GetResourceDictionary()
+            {
+                return DLSThemeManager.Instance.GetResourceDictionary();
+            }
 
-            public string TextColor => Status == Status.IDLE ? "#424242" : "#FFFFFF";
+            private T Get<T>(string key)
+            {
+                return (T)GetResourceDictionary()[key];
+            }
+
+            public Style StyleS => Status == Status.ACTIVE ? Get<Style>("SelectedS") : Get<Style>("UnselectedS");
+
+            public Style StyleL => Status == Status.ACTIVE ? Get<Style>("SelectedL") : Get<Style>("UnselectedL");
         }
 
         private Dictionary<int, int> cursorMap = new Dictionary<int, int>();

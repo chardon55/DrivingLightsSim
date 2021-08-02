@@ -4,28 +4,28 @@
              x:Class="DrivingLightsSim.Views.SimulationPage"
              xmlns:vm="clr-namespace:DrivingLightsSim.ViewModels"
              Title="{Binding Title}"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{DynamicResource SecondaryColor}">
     <ContentPage.BindingContext>
         <vm:SimulationViewModel x:Name="simulationViewModel"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <ListView BackgroundColor="Azure"
-                      x:Name="displayList"
-                      ItemsSource="{Binding InfoList, Mode=TwoWay}"
+            <ListView x:Name="displayList"
+                      ItemsSource="{Binding InfoList}"
                       SelectionMode="None"
                       RowHeight="100">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout BackgroundColor="{Binding BackgroundColor}">
+                            <StackLayout Style="{Binding StyleS}">
                                 <StackLayout Orientation="Vertical" Padding="20, 20, 20, 20">
                                     <Label Text="{Binding Title}"
                                        FontSize="Medium"
                                        FontAttributes="Bold"
-                                       TextColor="{Binding TextColor}"/>
+                                       Style="{Binding StyleL}"/>
                                     <Label Text="{Binding Answer}" HorizontalOptions="EndAndExpand"
-                                       TextColor="{Binding TextColor}"/>
+                                       Style="{Binding StyleL}"/>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>
@@ -44,13 +44,13 @@
                              Clicked="PlayToggleButton_Clicked"
                              HeightRequest="80"
                              WidthRequest="80"
-                             BackgroundColor="{StaticResource Primary}"
+                             BackgroundColor="{DynamicResource PrimaryColor}"
                              x:Name="PlayToggleButton"/>
                 <ImageButton Source="stop_light.png"  x:Name="StopButton" Clicked="StopButton_Clicked" 
                              HeightRequest="80"
                              WidthRequest="100"
                              Scale="0.7"
-                             BackgroundColor="{StaticResource Primary}"/>
+                             BackgroundColor="{DynamicResource PrimaryColor}"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

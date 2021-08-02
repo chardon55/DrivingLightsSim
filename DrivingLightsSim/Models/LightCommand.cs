@@ -25,19 +25,14 @@ namespace DrivingLightsSim.Models
     {
         public static string GetDescription(this AnswerType @this)
         {
-            switch (@this)
+            return @this switch
             {
-                case AnswerType.LOW:
-                    return "近光灯";
-                case AnswerType.HIGH:
-                    return "远光灯（等下一条播报时关闭远光灯）";
-                case AnswerType.LOW_HIGH:
-                    return "远光灯交替两次";
-                case AnswerType.FLASHING:
-                    return "关闭大灯，开示廓灯，打开双闪";
-                default:
-                    return "";
-            }
+                AnswerType.LOW => "近光灯",
+                AnswerType.HIGH => "远光灯（等下一条播报时关闭远光灯）",
+                AnswerType.LOW_HIGH => "远光灯交替两次",
+                AnswerType.FLASHING => "关闭大灯，开示廓灯，打开双闪",
+                _ => "",
+            };
         }
     }
 }

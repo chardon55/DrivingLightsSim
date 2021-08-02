@@ -4,33 +4,35 @@
              x:Class="DrivingLightsSim.Views.BrowsePage"
              xmlns:vm="clr-namespace:DrivingLightsSim.ViewModels"
              Title="{Binding Title}"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{DynamicResource SecondaryColor}">
     <ContentPage.BindingContext>
         <vm:BrowseViewModel x:Name="browseViewModel"/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <ListView x:Name="BrowseView"
-                      Header="{Binding StartCommand}"
-                      Footer="{Binding EndCommand}"
-                      SelectionMode="None"
-                      RowHeight="100"
-                      ItemTapped="BrowseView_ItemTapped">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Orientation="Vertical" Padding="20, 20, 20, 20">
-                                <Label Text="{Binding Content}"
-                                       FontSize="Medium"
-                                       FontAttributes="Bold"
-                                       TextColor="#333333"/>
-                                <Label Text="{Binding Answer}" HorizontalOptions="EndAndExpand"
-                                       TextColor="#454545"/>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="{Binding StartCommand}" Padding="20, 10" />
+                <ListView x:Name="BrowseView"
+                          SelectionMode="None"
+                          RowHeight="130"
+                          ItemTapped="BrowseView_ItemTapped"
+                          VerticalScrollBarVisibility="Never">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Vertical" Padding="20">
+                                    <Label Text="{Binding Content}"
+                                           FontSize="Medium"
+                                           FontAttributes="Bold"/>
+                                    <Label Text="{Binding Answer}" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Label Text="{Binding EndCommand}" Padding="20, 10" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

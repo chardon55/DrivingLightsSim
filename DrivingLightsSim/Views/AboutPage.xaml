@@ -5,24 +5,19 @@
              xmlns:vm="clr-namespace:DrivingLightsSim.ViewModels"
              xmlns:xe="clr-namespace:Xamarin.Essentials;assembly=Xamarin.Essentials" x:DataType="vm:AboutViewModel"
              Title="{Binding Title}"
-             Shell.NavBarIsVisible="False">
-    
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{DynamicResource SecondaryColor}">
+
     <ContentPage.BindingContext>
         <vm:AboutViewModel x:Name="aboutViewModel" />
     </ContentPage.BindingContext>
-    
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Color x:Key="Accent">#96d1ff</Color>
-        </ResourceDictionary>
-    </ContentPage.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+        <StackLayout BackgroundColor="{DynamicResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                 <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
                     <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
@@ -33,31 +28,31 @@
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10" >
                 <Label Text="灯光模拟小助手"
                        FontAttributes="Bold"
-                       FontSize="Subtitle"
-                       TextColor="Black" />
-                <Label TextColor="Black" FontSize="Small">
+                       FontSize="Subtitle" />
+                <Label FontSize="Small">
                     <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>
                                 <Span Text="版本："/>
                                 <Span Text="{Static xe:AppInfo.VersionString}"/>
-                                <Span Text="."/>
+                                <Span Text=" ("/>
                                 <Span Text="{Static xe:AppInfo.BuildString}"/>
+                                <Span Text=")"/>
                             </FormattedString.Spans>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Button Margin="0,10,0,0" Text="开放源代码许可"
+                <Button Margin="0,10,0,0" Text="开放源代码许可 (GPL v3.0) ↗"
                         Command="{Binding OpenWebCommand}"
-                        BackgroundColor="{StaticResource Primary}"
+                        BackgroundColor="{DynamicResource PrimaryColor}"
                         TextColor="White" />
-                <Button Margin="0,10,0,0" Text="历史版本"
+                <Button Margin="0,10,0,0" Text="历史版本 ↗"
                         Command="{Binding OpenReleaseCommand}"
-                        BackgroundColor="{StaticResource Primary}"
+                        BackgroundColor="{DynamicResource PrimaryColor}"
                         TextColor="White" />
                 <Button Margin="0,10,0,0" Text="检查更新"
                         Clicked="CheckUpdateButton_Clicked"
-                        BackgroundColor="{StaticResource Primary}"
+                        BackgroundColor="{DynamicResource PrimaryColor}"
                         TextColor="White"
                         x:Name="CheckUpdateButton"/>
             </StackLayout>

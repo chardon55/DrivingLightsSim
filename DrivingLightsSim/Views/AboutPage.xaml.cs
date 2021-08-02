@@ -31,11 +31,16 @@ namespace DrivingLightsSim.Views
 
             try
             {
-                info = await aboutViewModel.GetReleaseInfoAsync("GITEE");
+                info = await aboutViewModel.GetReleaseInfoAsync();
             }
-            catch (WebException ex)
+            catch (WebException)
             {
                 await DisplayAlert("错误", "网络异常，请检查网络", "确定");
+                return;
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("错误", "未知异常", "确定");
                 return;
             }
 
